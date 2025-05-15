@@ -19,12 +19,45 @@ namespace Portfolio.Controllers
         {
             //ViewBag es un diccionario que permite pasar datos desde el controlador a la vista 
             //ViewBag.Nombre = "Miguel Ángel";//Lo que pasa esque solo afecta a la vista Index.cshtml, es mejor utilizar modelos fuertemente tipados
-            var persona = new Persona()
+            /*var persona = new Persona()
             {
                 Nombre = "Miguel Ángel",
                 Edad = 25
+            };*/
+            var proyectos = ObtenerProyectos().Take(3).ToList();//Obtenemos los proyectos 
+            var modelo = new HomeIndexViewModel()
+            {
+                Proyectos = proyectos
             };
-            return View("Index", persona);//El primer parametro es el nombre de la vista y el segundo es el modelo que se le pasa a la vista
+            return View("Index", modelo);//El primer parametro es el nombre de la vista y el segundo es el modelo que se le pasa a la vista
+        }
+
+        private List<Proyecto> ObtenerProyectos()
+        {
+            return new List<Proyecto>()
+            {
+                new Proyecto()
+                {
+                    Titulo = "Proyecto 1",
+                    Descripcion = "Descripcion del proyecto 1",
+                    ImagenURL = "/images/car1.jpg",
+                    Link = "https://www.google.com"
+                },
+                new Proyecto()
+                {
+                    Titulo = "Proyecto 2",
+                    Descripcion = "Descripcion del proyecto 2",
+                    ImagenURL = "/images/donatello1.jpg",
+                    Link = "https://www.google.com"
+                },
+                new Proyecto()
+                {
+                    Titulo = "Proyecto 3",
+                    Descripcion = "Descripcion del proyecto 3",
+                    ImagenURL = "/images/habanero-red.jpg",
+                    Link = "https://www.google.com"
+                }
+            };
         }
 
         public IActionResult Privacy()

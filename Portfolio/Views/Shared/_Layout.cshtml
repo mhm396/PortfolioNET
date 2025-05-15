@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="~/Portfolio.styles.css" asp-append-version="true" />
     <!--Aqui referenciamos mi custom.css para poder utilizarlo, "asp-append-version" nos ayuda a no tener problema con el chache de los navegadores-->
     <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+    <!--Para tener acceso a los iconos de boostrap (ver la documentacion oficial)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <body>
     <header>
@@ -34,7 +36,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             <!--Donde se ejecuta lo principal, es decir el index u otro archivo compenzara a aparecer/ejecutarse aqui con RenderBody -->
             @RenderBody()

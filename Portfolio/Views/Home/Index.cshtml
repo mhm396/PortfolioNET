@@ -1,36 +1,45 @@
-﻿@model Persona //model con minuscula define el tipo del dato (@model string o Persona) y con M mayuscula accede al dato en concreto
+﻿@model HomeIndexViewModel
 
 @{
     //Vistas que se corresponden con las acciones del controlador HomeController
     ViewData["Title"] = "Principal";//Transmite esta informacion al layout, poniendo titulo a la pagina
 
-    string convertirMayusculas(string valor)
+    /*string convertirMayusculas(string valor)
     {
         return valor.ToUpper() + " JEJE";
-    }
+    }*/
 }
-<div class="text-center">
-    <!--<h1 class="display-4">Soy @ViewBag.Nombre</h1>-->
-    <h1 class="display-4">Soy @convertirMayusculas(Model.Nombre) (@Model.Edad)</h1>
+<!--Para mostrar una vista parcial-->
+<partial name="_Presentacion" />
 
-    @if(Model.Edad >= 18)
-    {
-        <h4 class="display-4">:)</h4>
-    }
-    else
-    {
-        <h4 class="display-4">:(</h4>
+<partial name="_Habilidades" />
 
-    }
+@if (Model.Proyectos is not null)
+{
+    <div class="text-center" style="padding-top: 6rem">
+        <h1>Mis proyectos</h1>
+        <p>Algunos de mis proyectos realizados</p>
+    </div>
 
-    <h2>Software developer especializado</h2>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
 
-    <!--Puedes ponerlo de manera directa pero es mejor colocarlo en el css-->
-    <!--<img
-        style="width: 200px; margin: 2rem 0; border-radius: 50%" 
-        src="~/images/img1.png" alt="Foto Perfil"/>-->
+            @foreach (var proyecto in Model.Proyectos)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="@proyecto.ImagenURL" class="card-img-top" alt="imagen Proyecto">
+                        <div class="card-body">
+                            <h5 class="card-title">@proyecto.Titulo</h5>
+                            <p class="card-text">@proyecto.Descripcion</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary" href="@proyecto.Link" target="_blank" rel="noopener noreferrer">Ver Proyecto</a>
+                        </div>
+                    </div>
+                </div>
+            }
 
-    <!--Ahora para enlazar mi custom.css debemos agregar el link a Layout en Shared-->
-    <img id="fotoPerfil"
-         src="~/images/img1.png" alt="Foto Perfil" />
-</div>
+        </div>
+    </div>
+}
