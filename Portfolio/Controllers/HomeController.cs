@@ -9,11 +9,13 @@ namespace Portfolio.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProyectosRepositorio proyectosRepositorio;
+        private readonly IEmailService servicioEmail;
 
-        public HomeController(ILogger<HomeController> logger, IProyectosRepositorio proyectosRepositorio)
+        public HomeController(ILogger<HomeController> logger, IProyectosRepositorio proyectosRepositorio, IEmailService servicioEmail)
         {
             _logger = logger;
             this.proyectosRepositorio = proyectosRepositorio;
+            this.servicioEmail = servicioEmail;
         }
 
         //Acciones que se ejecutan cuando hacemos una peticion HTTP a una ruta especifica de la aplicacion
@@ -38,10 +40,29 @@ namespace Portfolio.Controllers
 
 
 
-        public IActionResult Proyectos()
+        public IActionResult Proyectos()//Por defecto es HTTPGET
         {
             var proyectos = proyectosRepositorio.ObtenerProyectos().ToList();
             return View("Proyectos", proyectos);
+        }
+
+        public IActionResult Contacto()
+        {
+           
+            return View();
+        }
+
+        [HttpPost]//Especificamos que esta accion solo se ejecutara cuando se haga una peticion HTTP POST
+        public async Task<IActionResult> Contacto(ContactoViewModel contactoViewModel)
+        {
+            await servicioEmail.Enviar(contactoViewModel);//Enviamos el email
+            return RedirectToAction("Gracias");
+        }
+
+        public IActionResult Gracias()
+        {
+
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

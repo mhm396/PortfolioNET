@@ -5,6 +5,7 @@
 	  <Nullable>disable</Nullable>
 	  <!-- Nullable reference types are disabled for this project. -->
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>a237bb8e-1fc3-4b46-887d-29e8d3c7889e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

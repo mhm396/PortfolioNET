@@ -16,6 +16,7 @@ builder.Services.AddTransient<IProyectosRepositorio, ProyectosRepositorio>(); //
 builder.Services.AddScoped<ServicioDelimitado>(); //Cada instancia se generara una vez, pero si generamos dos instancias iguales tienen el mismo
 builder.Services.AddSingleton<ServicioUnico>(); //Siempre es el mismo
 */
+builder.Services.AddTransient<IEmailService, EmailService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
