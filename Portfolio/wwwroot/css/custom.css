@@ -31,3 +31,15 @@
 .habilidades i {
     font-size: 50px;
 }
+
+.card-img-container {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+}
+
+    .card-img-container img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
